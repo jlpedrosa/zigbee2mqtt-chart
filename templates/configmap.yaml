@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "zigbee2mqtt.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "zigbee2mqtt.labels" . | nindent 4 }}
+  {{- with .Values.service.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+data:
+  configuration.yaml: |
+    homeassistant: {{ .Values.zigbee2mqtt.homeassistant }}
+    permit_join: {{ .Values.zigbee2mqtt.permit_join }}
+    mqtt:
+      # MQTT base topic for zigbee2mqtt MQTT messages
+      base_topic: {{ .Values.zigbee2mqtt.mqtt.base_topic }}
+      # MQTT server URL
+      server: {{ .Values.zigbee2mqtt.mqtt.server }}
+      # MQTT server authentication, uncomment if required:
+      user: {{ .Values.zigbee2mqtt.mqtt.user }}
+      password: {{ .Values.zigbee2mqtt.mqtt.password }}
+
+    serial:
+      port: {{ .Values.zigbee2mqtt.serial.port }}
+      baudrate: {{ .Values.zigbee2mqtt.serial.baudrate }}
+      adapter: {{ .Values.zigbee2mqtt.serial.adapter }}
+      disable_led: {{ .Values.zigbee2mqtt.serial.disable_led }}
+    advanced:
+      transmit_power: {{ .Values.zigbee2mqtt.advanced.transmit_power }}

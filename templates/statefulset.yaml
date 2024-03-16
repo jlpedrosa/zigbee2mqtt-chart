@@ -1,0 +1,70 @@
+---
+kind: StatefulSet
+apiVersion: apps/v1
+metadata:
+  name: {{ include "zigbee2mqtt.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+{{ include "zigbee2mqtt.labels" . | indent 2 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ include "zigbee2mqtt.fullname" . }}
+  template:
+    metadata:
+{{ include "zigbee2mqtt.labels" . | indent 6 }}
+      app: {{ include "zigbee2mqtt.fullname" . }}
+    spec:
+      {{- if .Values.image.imagePullSecrets }}
+      imagePullSecrets:
+{{ toYaml .Values.image.imagePullSecrets | indent 8 }}
+      {{- end }}
+      dnsPolicy: {{ .Values.statefulset.dnsPolicy }}
+{{- with .Values.statefulset.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+{{- end }}
+      nodeSelector:
+{{- with .Values.statefulset.nodeSelector }}
+{{ toYaml . | indent 8 }}
+{{- end }}
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+{{- with .Values.statefulset.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+{{- end }}
+      containers:
+        - name: zigbee2mqtt
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          securityContext:
+            privileged: true
+            capabilities:
+              add: ["SYS_ADMIN"]
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: TZ
+              value: Europe/Amsterdam
+          ports:
+            - containerPort: 8080
+              name: web
+              protocol: TCP
+          livenessProbe:
+            failureThreshold: 5
+            httpGet:
+              path: /
+              port: web
+            initialDelaySeconds: 30
+            timeoutSeconds: 10
+            periodSeconds: 30
+          volumeMounts:
+            - mountPath: /app/data
+              name: config-volume
+          resources: {{- toYaml .Values.statefulset.resources | nindent 12 }}
+      volumes:
+        - name: config-volume
+          configMap:
+            # Provide the name of the ConfigMap containing the files you want
+            # to add to the container
+            name: {{ include "zigbee2mqtt.fullname" . }}
