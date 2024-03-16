@@ -1,0 +1,50 @@
+apiVersion: v1
+entries:
+  zigbee2mqtt:
+  - apiVersion: v2
+    appVersion: 1.36.0
+    created: "2024-03-16T23:44:07.219456515Z"
+    description: Bridges events and allows you to control your Zigbee devices via
+      MQTT
+    digest: 36c0f1bcc238cac0552bbc7b77abe0397ba0464a6171ae74224176c4a3b502f8
+    home: https://github.com/jlpedrosa/zigbee2mqtt-charts
+    icon: https://www.zigbee2mqtt.io/logo.png
+    keywords:
+    - zigbee
+    - mqtt
+    - home-assistant
+    kubeVersion: '>=1.16.0-0'
+    maintainers:
+    - email: jlpedrosa@gmail.com
+      name: Jose Luis Pedrosa
+    name: zigbee2mqtt
+    sources:
+    - https://github.com/Koenkk/zigbee2mqtt
+    - https://github.com/jlpedrosa/zigbee2mqtt-charts
+    urls:
+    - https://jlpedrosa.github.io/zigbee2mqtt-chart/charts/zigbee2mqtt-1.36.0+chart1.tgz
+    version: 1.36.0+chart1
+  - apiVersion: v2
+    appVersion: 1.36.0
+    created: "2024-03-16T23:44:07.219673451Z"
+    description: Bridges events and allows you to control your Zigbee devices via
+      MQTT
+    digest: cf65c7cee2369d9310f1250dc492d6fcfcf56f7bbaded7ec950a816fd7e68a2d
+    home: https://github.com/jlpedrosa/zigbee2mqtt-charts
+    icon: https://www.zigbee2mqtt.io/logo.png
+    keywords:
+    - zigbee
+    - mqtt
+    - home-assistant
+    kubeVersion: '>=1.16.0-0'
+    maintainers:
+    - email: jlpedrosa@gmail.com
+      name: Jose Luis Pedrosa
+    name: zigbee2mqtt
+    sources:
+    - https://github.com/Koenkk/zigbee2mqtt
+    - https://github.com/jlpedrosa/zigbee2mqtt-charts
+    urls:
+    - https://jlpedrosa.github.io/zigbee2mqtt-chart/charts/zigbee2mqtt-1.36.0.tgz
+    version: 1.36.0
+generated: "2024-03-16T23:44:07.219008032Z"

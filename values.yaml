@@ -29,6 +29,8 @@ zigbee2mqtt:
   homeassistant: true
   permit_join: true
   timezone: UTC
+  frontend:
+    url: http://0.0.0.0:8080
   mqtt:
     base_topic: zigbee2mqtt
     server: mqtt://mosquitto

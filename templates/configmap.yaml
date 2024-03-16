@@ -12,6 +12,8 @@ data:
   configuration.yaml: |
     homeassistant: {{ .Values.zigbee2mqtt.homeassistant }}
     permit_join: {{ .Values.zigbee2mqtt.permit_join }}
+    frontend:
+     url: {{ .Values.zigbee2mqtt.frontend.url }}
     mqtt:
       # MQTT base topic for zigbee2mqtt MQTT messages
       base_topic: {{ .Values.zigbee2mqtt.mqtt.base_topic }}
