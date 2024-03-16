@@ -3,16 +3,18 @@ fullnameOverride: "long-custom-name"
 
 image:
   # -- Image repository for the `zigbee2mqtt` container.
-  repository: zigbee2mqtt/zigbee2mqtt-amd64
-  tag: 1.36.0-1
+  repository: koenkk/zigbee2mqtt
+  tag: 1.36.0
   pullPolicy: IfNotPresent
   imagePullSecrets: { }
 
 service:
-  type: ClusterIP
+  type: LoadBalancer
   port: 8080
 
 statefulset:
+  storage:
+    storageClassName: nfs-csi
   dnsPolicy: ClusterFirst
   resources:
     requests:
@@ -26,23 +28,20 @@ statefulset:
 zigbee2mqtt:
   homeassistant: true
   permit_join: true
+  timezone: UTC
   mqtt:
     base_topic: zigbee2mqtt
-    server: mqtt://localhost
+    server: mqtt://mosquitto
     user: "test"
     password: "test"
-
-  # Pay attention, if you use the Z2M addon for HA, it is better to edit the yaml configuration file directly
   serial:
-    # Location of SLZB-06M
     port: tcp://10.50.30.200:6638
     baudrate: 115200
     adapter: ezsp
-    # Disable green led?
     disable_led: false
-  # Set output power to max 20
   advanced:
     transmit_power: 20
+    log_level: debug
 
 
 

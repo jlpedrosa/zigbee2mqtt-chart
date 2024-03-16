@@ -3,8 +3,7 @@ kind: ConfigMap
 metadata:
   name: {{ include "zigbee2mqtt.fullname" . }}
   namespace: {{ .Release.Namespace }}
-  labels:
-    {{- include "zigbee2mqtt.labels" . | nindent 4 }}
+{{ include "zigbee2mqtt.labels" . | indent 2 }}
   {{- with .Values.service.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
@@ -21,7 +20,6 @@ data:
       # MQTT server authentication, uncomment if required:
       user: {{ .Values.zigbee2mqtt.mqtt.user }}
       password: {{ .Values.zigbee2mqtt.mqtt.password }}
-
     serial:
       port: {{ .Values.zigbee2mqtt.serial.port }}
       baudrate: {{ .Values.zigbee2mqtt.serial.baudrate }}
@@ -29,3 +27,11 @@ data:
       disable_led: {{ .Values.zigbee2mqtt.serial.disable_led }}
     advanced:
       transmit_power: {{ .Values.zigbee2mqtt.advanced.transmit_power }}
+      # Optional: Logging level, options: debug, info, warn, error (default: info)
+      log_level: {{ .Values.zigbee2mqtt.advanced.log_level }}
+      # Optional: log timestamp format (default: shown below)
+      timestamp_format: 'YYYY-MM-DD HH:mm:ss'
+      # Optional: Output location of the log (default: shown below), leave empty to suppress logging (log_output: [])
+      # possible options: 'console', 'file', 'syslog'
+      log_output:
+        - console

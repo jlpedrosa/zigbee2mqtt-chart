@@ -3,8 +3,7 @@ kind: Service
 metadata:
   name: {{ include "zigbee2mqtt.fullname" . }}
   namespace: {{ .Release.Namespace }}
-  labels:
-    {{- include "zigbee2mqtt.labels" . | nindent 4 }}
+{{ include "zigbee2mqtt.labels" . | indent 2 }}
   {{- with .Values.service.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}

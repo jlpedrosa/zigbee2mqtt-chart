@@ -13,7 +13,7 @@ spec:
   template:
     metadata:
 {{ include "zigbee2mqtt.labels" . | indent 6 }}
-      app: {{ include "zigbee2mqtt.fullname" . }}
+        app: {{ include "zigbee2mqtt.fullname" . }}
     spec:
       {{- if .Values.image.imagePullSecrets }}
       imagePullSecrets:
@@ -45,7 +45,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: TZ
-              value: Europe/Amsterdam
+              value: {{ .Values.zigbee2mqtt.timezone }}
           ports:
             - containerPort: 8080
               name: web
@@ -59,8 +59,12 @@ spec:
             timeoutSeconds: 10
             periodSeconds: 30
           volumeMounts:
-            - mountPath: /app/data
+            - mountPath: /app/data/configuration.yaml
               name: config-volume
+              subPath: configuration.yaml
+            - mountPath: /app/data/
+              name: data-volume
+              subPath: configuration.yaml
           resources: {{- toYaml .Values.statefulset.resources | nindent 12 }}
       volumes:
         - name: config-volume
@@ -68,3 +72,13 @@ spec:
             # Provide the name of the ConfigMap containing the files you want
             # to add to the container
             name: {{ include "zigbee2mqtt.fullname" . }}
+
+  volumeClaimTemplates:
+  - metadata:
+      name: data-volume
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: {{ .Values.statefulset.storage.storageClassName }}
+      resources:
+        requests:
+          storage: 1Gi
