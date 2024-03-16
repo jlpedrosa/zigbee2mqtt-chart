@@ -3,10 +3,10 @@ entries:
   zigbee2mqtt:
   - apiVersion: v2
     appVersion: 1.36.0
-    created: "2024-03-16T21:11:39.971481037Z"
+    created: "2024-03-16T21:36:47.389178276Z"
     description: Bridges events and allows you to control your Zigbee devices via
       MQTT
-    digest: fccbd14b595300cbad66e4110ced419d2f44657eb9a6713217df9092e65fd899
+    digest: cf65c7cee2369d9310f1250dc492d6fcfcf56f7bbaded7ec950a816fd7e68a2d
     home: https://github.com/jlpedrosa/zigbee2mqtt-charts
     icon: https://www.zigbee2mqtt.io/logo.png
     keywords:
@@ -22,6 +22,6 @@ entries:
     - https://github.com/Koenkk/zigbee2mqtt
     - https://github.com/jlpedrosa/zigbee2mqtt-charts
     urls:
-    - https://jlpedrosa.github.io/zigbee2mqtt-chart/zigbee2mqtt-1.36.0.tgz
+    - https://jlpedrosa.github.io/zigbee2mqtt-chart/charts/zigbee2mqtt-1.36.0.tgz
     version: 1.36.0
-generated: "2024-03-16T21:11:39.970983168Z"
+generated: "2024-03-16T21:36:47.388855055Z"
