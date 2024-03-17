@@ -10,6 +10,11 @@ metadata:
   {{- end }}
 data:
   configuration.yaml: |
+    # Define the files which contains the configs. As k8s config maps
+    # Are read only by design, we need to extract dynamic config to external files
+    devices: devices.yaml
+    groups: groups.yaml
+
     homeassistant: {{ .Values.zigbee2mqtt.homeassistant }}
     permit_join: {{ .Values.zigbee2mqtt.permit_join }}
     frontend:
