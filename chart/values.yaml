@@ -1,5 +1,5 @@
-nameOverride: "nameOverride"
-fullnameOverride: "fullnameOverride"
+#nameOverride: "nameoverride"
+#2fullnameOverride: "fullnameoverride"
 customLabels: {}
 
 image:
@@ -15,7 +15,7 @@ service:
   port: 8080
 
 ingress:
-  enabled: false
+  enabled: true
   ingressClassName: contour
   labels: {}
   path: /
