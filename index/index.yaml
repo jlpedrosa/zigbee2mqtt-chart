@@ -3,7 +3,7 @@ entries:
   zigbee2mqtt:
   - apiVersion: v2
     appVersion: 1.36.0
-    created: "2024-03-17T16:24:38.403622226Z"
+    created: "2024-03-17T19:01:24.677227607Z"
     description: Bridges events and allows you to control your Zigbee devices via
       MQTT
     digest: da1e8f950cc18478536d283b5c396522ca0af4ddc157be08a0f7c6efea2ed2a5
@@ -26,7 +26,7 @@ entries:
     version: 1.36.0+chart1
   - apiVersion: v2
     appVersion: 1.36.0
-    created: "2024-03-17T16:24:38.403813317Z"
+    created: "2024-03-17T19:01:24.677409346Z"
     description: Bridges events and allows you to control your Zigbee devices via
       MQTT
     digest: c0a3b4aaade05c9ee6b1795998759bcf52e20bde618948353a6362932b1d803e
@@ -49,7 +49,7 @@ entries:
     version: 1.36.0+chart2
   - apiVersion: v2
     appVersion: 1.36.0
-    created: "2024-03-17T16:24:38.403988809Z"
+    created: "2024-03-17T19:01:24.677578578Z"
     description: Bridges events and allows you to control your Zigbee devices via
       MQTT
     digest: d0d7ce0a4af78e7dcf201d5f1817c9f89ab8dea8d338312f667b33270954dd22
@@ -70,4 +70,27 @@ entries:
     urls:
     - https://jlpedrosa.github.io/zigbee2mqtt-chart/index/zigbee2mqtt-1.36.0+chart3.tgz
     version: 1.36.0+chart3
-generated: "2024-03-17T16:24:38.403335799Z"
+  - apiVersion: v2
+    appVersion: 1.36.0
+    created: "2024-03-17T19:01:24.677807504Z"
+    description: Bridges events and allows you to control your Zigbee devices via
+      MQTT
+    digest: 4df64d552c787b37b3c066d18b75c03e59082c84201d295599d2d880eb8523f9
+    home: https://github.com/jlpedrosa/zigbee2mqtt-charts
+    icon: https://www.zigbee2mqtt.io/logo.png
+    keywords:
+    - zigbee
+    - mqtt
+    - home-assistant
+    kubeVersion: '>=1.16.0-0'
+    maintainers:
+    - email: jlpedrosa@gmail.com
+      name: Jose Luis Pedrosa
+    name: zigbee2mqtt
+    sources:
+    - https://github.com/Koenkk/zigbee2mqtt
+    - https://github.com/jlpedrosa/zigbee2mqtt-charts
+    urls:
+    - https://jlpedrosa.github.io/zigbee2mqtt-chart/index/zigbee2mqtt-1.36.0+chart4.tgz
+    version: 1.36.0+chart4
+generated: "2024-03-17T19:01:24.676934677Z"

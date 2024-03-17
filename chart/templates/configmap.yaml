@@ -3,7 +3,8 @@ kind: ConfigMap
 metadata:
   name: {{ include "zigbee2mqtt.fullname" . }}
   namespace: {{ .Release.Namespace }}
-{{ include "zigbee2mqtt.labels" . | indent 2 }}
+  labels:
+    {{- include "zigbee2mqtt.labels" . | nindent 4 }}
   {{- with .Values.service.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
@@ -14,31 +15,40 @@ data:
     # Are read only by design, we need to extract dynamic config to external files
     devices: devices.yaml
     groups: groups.yaml
-
-    homeassistant: {{ .Values.zigbee2mqtt.homeassistant }}
+    {{- if .Values.zigbee2mqtt.homeassistant.enabled }}
+    homeassistant:
+      discovery_topic: {{ .Values.zigbee2mqtt.homeassistant.discovery_topic }}
+      status_topic:  {{ .Values.zigbee2mqtt.homeassistant.status_topic }}
+      legacy_entity_attributes: {{ .Values.zigbee2mqtt.homeassistant.legacy_entity_attributes }}
+      legacy_triggers: {{ .Values.zigbee2mqtt.homeassistant.legacy_triggers }}
+    {{- end }}
     permit_join: {{ .Values.zigbee2mqtt.permit_join }}
     frontend:
      url: {{ .Values.zigbee2mqtt.frontend.url }}
+     port: 8080
+     host: 0.0.0.0
     mqtt:
-      # MQTT base topic for zigbee2mqtt MQTT messages
       base_topic: {{ .Values.zigbee2mqtt.mqtt.base_topic }}
-      # MQTT server URL
       server: {{ .Values.zigbee2mqtt.mqtt.server }}
-      # MQTT server authentication, uncomment if required:
       user: {{ .Values.zigbee2mqtt.mqtt.user }}
       password: {{ .Values.zigbee2mqtt.mqtt.password }}
     serial:
       port: {{ .Values.zigbee2mqtt.serial.port }}
-      baudrate: {{ .Values.zigbee2mqtt.serial.baudrate }}
-      adapter: {{ .Values.zigbee2mqtt.serial.adapter }}
       disable_led: {{ .Values.zigbee2mqtt.serial.disable_led }}
+      adapter: {{ .Values.zigbee2mqtt.serial.adapter }}
+      baudrate: {{ .Values.zigbee2mqtt.serial.baudrate }}
+      rtscts: {{ .Values.zigbee2mqtt.serial.rtscts }}
     advanced:
-      transmit_power: {{ .Values.zigbee2mqtt.advanced.transmit_power }}
-      # Optional: Logging level, options: debug, info, warn, error (default: info)
-      log_level: {{ .Values.zigbee2mqtt.advanced.log_level }}
-      # Optional: log timestamp format (default: shown below)
-      timestamp_format: 'YYYY-MM-DD HH:mm:ss'
-      # Optional: Output location of the log (default: shown below), leave empty to suppress logging (log_output: [])
-      # possible options: 'console', 'file', 'syslog'
+      # Define the files which contains the configs. As k8s config maps
+      # Are read only by design, we need to extract dynamic config to external files
+      network_key: '!secret.yaml network_key'
       log_output:
         - console
+      log_level: {{ .Values.zigbee2mqtt.advanced.log_level }}
+      timestamp_format: 'YYYY-MM-DD HH:mm:ss'
+
+      transmit_power: {{ .Values.zigbee2mqtt.advanced.transmit_power }}
+      homeassistant_legacy_entity_attributes: {{ .Values.zigbee2mqtt.advanced.homeassistant_legacy_entity_attributes }}
+      legacy_api:  {{ .Values.zigbee2mqtt.advanced.legacy_api }}
+      legacy_availability_payload: {{ .Values.zigbee2mqtt.advanced.legacy_availability_payload }}
+

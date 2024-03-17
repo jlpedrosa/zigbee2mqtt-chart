@@ -4,7 +4,8 @@ apiVersion: apps/v1
 metadata:
   name: {{ include "zigbee2mqtt.fullname" . }}
   namespace: {{ .Release.Namespace }}
-{{ include "zigbee2mqtt.labels" . | indent 2 }}
+  labels:
+    {{- include "zigbee2mqtt.labels" . | nindent 4 }}
 spec:
   replicas: 1
   selector:
@@ -12,7 +13,8 @@ spec:
       app: {{ include "zigbee2mqtt.fullname" . }}
   template:
     metadata:
-{{ include "zigbee2mqtt.labels" . | indent 6 }}
+      labels:
+        {{- include "zigbee2mqtt.labels" . | nindent 8 }}
         app: {{ include "zigbee2mqtt.fullname" . }}
     spec:
       {{- if .Values.image.imagePullSecrets }}
@@ -69,8 +71,6 @@ spec:
       volumes:
         - name: config-volume
           configMap:
-            # Provide the name of the ConfigMap containing the files you want
-            # to add to the container
             name: {{ include "zigbee2mqtt.fullname" . }}
 
   volumeClaimTemplates:

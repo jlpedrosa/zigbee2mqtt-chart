@@ -26,13 +26,12 @@ If release name contains chart name it will be used as a full name.
 
 {{/* labels for helm resources */}}
 {{- define "zigbee2mqtt.labels" -}}
-labels:
-  app.kubernetes.io/instance: "{{ .Release.Name }}"
-  app.kubernetes.io/managed-by: "{{ .Release.Service }}"
-  app.kubernetes.io/name: "{{ template "zigbee2mqtt.name" . }}"
-  app.kubernetes.io/version: "{{ .Chart.AppVersion }}"
-  helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
-  {{- if .Values.customLabels }}
+app.kubernetes.io/instance: "{{ .Release.Name }}"
+app.kubernetes.io/managed-by: "{{ .Release.Service }}"
+app.kubernetes.io/name: "{{ template "zigbee2mqtt.name" . }}"
+app.kubernetes.io/version: "{{ .Chart.AppVersion }}"
+helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+{{- if .Values.customLabels }}
 {{ toYaml .Values.customLabels | indent 2 -}}
-  {{- end }}
-{{- end -}}
+{{- end }}
+{{- end }}
