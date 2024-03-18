@@ -39,14 +39,10 @@ data:
       baudrate: {{ .Values.zigbee2mqtt.serial.baudrate }}
       rtscts: {{ .Values.zigbee2mqtt.serial.rtscts }}
     advanced:
-      # Define the files which contains the configs. As k8s config maps
-      # Are read only by design, we need to extract dynamic config to external files
-      network_key: '!secret.yaml network_key'
       log_output:
         - console
       log_level: {{ .Values.zigbee2mqtt.advanced.log_level }}
       timestamp_format: 'YYYY-MM-DD HH:mm:ss'
-
       transmit_power: {{ .Values.zigbee2mqtt.advanced.transmit_power }}
       homeassistant_legacy_entity_attributes: {{ .Values.zigbee2mqtt.advanced.homeassistant_legacy_entity_attributes }}
       legacy_api:  {{ .Values.zigbee2mqtt.advanced.legacy_api }}

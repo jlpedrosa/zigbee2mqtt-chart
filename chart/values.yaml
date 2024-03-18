@@ -1,5 +1,5 @@
 #nameOverride: "nameoverride"
-#2fullnameOverride: "fullnameoverride"
+#fullnameOverride: "fullnameoverride"
 customLabels: {}
 
 image:
