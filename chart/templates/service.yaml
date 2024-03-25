@@ -1,4 +1,6 @@
+## test ##
 apiVersion: v1
+
 kind: Service
 metadata:
   name: {{ include "zigbee2mqtt.fullname" . }}
